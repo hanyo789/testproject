@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3018e9bca3b7145a58c3a38b933def, type: 3}
+  m_Name: Charmander
+  m_EditorClassIdentifier: 
+  pname: Charmander
+  description: 
+  frontSprite: {fileID: 21300000, guid: 21aefe4945f7bba4ea455c2175f41669, type: 3}
+  backSprite: {fileID: 21300000, guid: 64eb27fb41405134abac2bf78febfb3c, type: 3}
+  type1: 0
+  type2: 0
+  maxHp: 12
+  attack: 17
+  defense: 16
+  spAttack: 21
+  spDefense: 20
+  speed: 19
+  learnableMoves: []
