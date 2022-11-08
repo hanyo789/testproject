@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{e6bdc332-25e1-2831-82c1-25d0441455a3}</ProjectGuid>
+    <ProjectGuid>{8d7f1852-2b50-1fe0-959a-e7f8516acbf1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -38,21 +38,27 @@
   <ItemGroup>
      <Compile Include="Assets\script\battle\BattleSystem.cs" />
      <Compile Include="Assets\script\GameController.cs" />
+     <Compile Include="Assets\script\pokemons\Condition.cs" />
+     <Compile Include="Assets\script\Gameplay\Interactable.cs" />
      <Compile Include="Assets\script\battle\BattleHud.cs" />
      <Compile Include="Assets\script\battle\BattleUnit.cs" />
      <Compile Include="Assets\script\battle\HPBar.cs" />
      <Compile Include="Assets\script\battle\BattleDialogBox.cs" />
+     <Compile Include="Assets\script\player\NPCController.cs" />
+     <Compile Include="Assets\script\Gameplay\DialogManager.cs" />
      <Compile Include="Assets\script\pokemons\MoveBase.cs" />
      <Compile Include="Assets\script\player\PlayerController.cs" />
      <Compile Include="Assets\script\pokemons\PokemonParty.cs" />
      <Compile Include="Assets\script\battle\PartyMemberUI.cs" />
      <Compile Include="Assets\script\pokemons\PokemonBase.cs" />
      <Compile Include="Assets\script\pokemons\Moves.cs" />
+     <Compile Include="Assets\script\Gameplay\Dialog.cs" />
+     <Compile Include="Assets\script\Utilly\SpriteAnimator.cs" />
      <Compile Include="Assets\script\Gameplay\MapArea.cs" />
      <Compile Include="Assets\script\battle\PartyScreen.cs" />
      <Compile Include="Assets\script\pokemons\Pokemon.cs" />
-     <Compile Include="Assets\script\pokemons\Condition.cs" />
      <Compile Include="Assets\script\Data\ConditionsDB.cs" />
+     <Compile Include="Assets\script\player\CharacterAnimator.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\unity\2020.3.30f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -276,7 +282,7 @@
         <HintPath>D:\unity\2020.3.30f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-        <HintPath>D:\unity\projectPKM\My project\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>D:\unity\2020.3.30f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -624,99 +630,99 @@
         <HintPath>D:\unity\2020.3.30f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="PsdPlugin">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Psdimporter.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Path.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.IK.Runtime">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Triangle.Runtime">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Animation.Runtime">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Common.Editor">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Runtime">
-        <HintPath>D:\unity\projectPKM\My project\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+        <HintPath>C:\Users\USER\OneDrive\Desktop\pkmgameproject\projectPKM\Myproject\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{fe102f6a-9808-1c9c-9897-d62f3a6958cf}</Project>
+      <Project>{58d0eb79-0671-593c-e685-2fa2dccbce0d}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
