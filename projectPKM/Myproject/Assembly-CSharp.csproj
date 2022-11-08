@@ -48,6 +48,7 @@
      <Compile Include="Assets\script\Gameplay\DialogManager.cs" />
      <Compile Include="Assets\script\pokemons\MoveBase.cs" />
      <Compile Include="Assets\script\player\PlayerController.cs" />
+     <Compile Include="Assets\script\player\CharacterAnimator.cs" />
      <Compile Include="Assets\script\pokemons\PokemonParty.cs" />
      <Compile Include="Assets\script\battle\PartyMemberUI.cs" />
      <Compile Include="Assets\script\pokemons\PokemonBase.cs" />
@@ -58,7 +59,8 @@
      <Compile Include="Assets\script\battle\PartyScreen.cs" />
      <Compile Include="Assets\script\pokemons\Pokemon.cs" />
      <Compile Include="Assets\script\Data\ConditionsDB.cs" />
-     <Compile Include="Assets\script\player\CharacterAnimator.cs" />
+     <Compile Include="Assets\script\player\Character.cs" />
+     <Compile Include="Assets\script\Gameplay\GameLayers.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\unity\2020.3.30f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

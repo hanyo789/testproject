@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 586115369}
   - component: {fileID: 586115373}
   - component: {fileID: 586115372}
+  - component: {fileID: 586115374}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1105,16 +1106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162c0a24b265cf14faae645cde6af305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  solidObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  grassLayer:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!212 &586115370
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1234,6 +1225,19 @@ MonoBehaviour:
     level: 10
   - _base: {fileID: 11400000, guid: faef24d5b87725b4288e555f975a50bf, type: 2}
     level: 10
+--- !u!114 &586115374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586115368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a501e9758ff75c24b9c97493262e473b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!1 &620900221
 GameObject:
   m_ObjectHideFlags: 0
@@ -10578,6 +10582,7 @@ GameObject:
   - component: {fileID: 756346714}
   - component: {fileID: 756346713}
   - component: {fileID: 756346715}
+  - component: {fileID: 756346716}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -10629,6 +10634,27 @@ MonoBehaviour:
   dialogBox: {fileID: 2053253042}
   dialogText: {fileID: 782350820}
   lettersPerSecond: 45
+--- !u!114 &756346716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756346712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49791e8e57f30554ca6d98f9bb966689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solidObjectsLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  grassLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &782350818
 GameObject:
   m_ObjectHideFlags: 0
