@@ -13,6 +13,8 @@ public class BattleSystem : MonoBehaviour
    
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] Image playerImage;
+    [SerializeField] Image trainerImage;
 
     public event Action<bool> OnBattleOver;
 
@@ -23,7 +25,11 @@ public class BattleSystem : MonoBehaviour
     int currentMember;
 
     PokemonParty playerParty;
+    PokemonParty trainerParty;
     Pokemon wildPokemon;
+    bool isTrainerBattle = false;
+    PlayerController player;
+    TrainerController trainer;
 
     public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon)
      {
@@ -34,17 +40,66 @@ public class BattleSystem : MonoBehaviour
     
         
     }
+    public void StartTrainerBattle(PokemonParty playerParty, PokemonParty trainerParty)
+     {
+        
+        this.playerParty = playerParty;
+        this.trainerParty = trainerParty;
+
+        isTrainerBattle = true;
+        player = playerParty.GetComponent<PlayerController>();
+        trainer = trainerParty.GetComponent<TrainerController>();
+
+        StartCoroutine(SetupBattle());
+    
+        
+    }
     public IEnumerator SetupBattle()
     {
-        playerUnit.Setup(playerParty.GetHeathyPokemon());
-        enemyUnit.Setup(wildPokemon);
-        
+        playerUnit.Clear();
+        enemyUnit.Clear();
+
+        if (!isTrainerBattle)
+        {
+            //wild battle
+            playerUnit.Setup(playerParty.GetHeathyPokemon());
+            enemyUnit.Setup(wildPokemon);
+
+            dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
+
+            yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
+        }
+        else 
+        {
+            //trainer 
+            playerUnit.gameObject.SetActive(false);
+            enemyUnit.gameObject.SetActive(false);
+
+            playerImage.gameObject.SetActive(true);
+            trainerImage.gameObject.SetActive(true);
+            playerImage.sprite = player.Sprite;
+            trainerImage.sprite = trainer.Sprite;
+
+            yield return dialogBox.TypeDialog($"{trainer.Name} wants to battle!");
+            //send 1st pokemon
+            trainerImage.gameObject.SetActive(false);
+            enemyUnit.gameObject.SetActive(true);
+            var enemyPokemon = trainerParty.GetHeathyPokemon();
+            enemyUnit.Setup(enemyPokemon);
+            yield return dialogBox.TypeDialog($"{trainer.Name} send out {enemyPokemon.Base.Name}!");
+
+            //player send pokemon
+           playerImage.gameObject.SetActive(false); 
+           playerUnit.gameObject.SetActive(true);
+           var playerPokemon = playerParty.GetHeathyPokemon();
+           playerUnit.Setup(playerPokemon);
+           yield return dialogBox.TypeDialog($"Go {playerPokemon.Base.Name}!");
+            dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
+        }
+
+
+           
         partyScreen.Init();
-
-        dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
-
-        yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pokemon.Base.Name} appeared.");
-     
         ActionSelection();
 }
 
@@ -286,7 +341,24 @@ void CheckForBattleOver( BattleUnit faintedUnit)
            BattleOver(false);
     }
     else
-        BattleOver(true);
+    {
+        if (!isTrainerBattle)
+        {
+            BattleOver(true);
+        }
+        else
+        {
+            var nextPokemon = trainerParty.GetHeathyPokemon();
+            if(nextPokemon != null)
+                StartCoroutine(SendNextTrainerPokemon(nextPokemon));
+            else
+            {
+                BattleOver(true);
+            }
+        }
+        
+    }
+        
 }
 IEnumerator ShowDamageDetails(DamageDetails damageDetails){
     if (damageDetails.Critical > 1f)
@@ -450,6 +522,16 @@ IEnumerator SwitchPokemon(Pokemon newPokemon)
     state = BattleState.RunningTurn;
      
 
+}
+
+IEnumerator SendNextTrainerPokemon(Pokemon nextPokemon)
+{
+    state = BattleState.Busy;
+
+    enemyUnit.Setup(nextPokemon);
+    yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextPokemon.Base.Name}!");
+    
+    state = BattleState.RunningTurn;
 }
 }
 

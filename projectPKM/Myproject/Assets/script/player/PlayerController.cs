@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-  
+    [SerializeField] string name;
+    [SerializeField] Sprite sprite;
    public event Action OnEncountered;
    public event Action<Collider2D> OnEnterTrainerView;
 
@@ -90,4 +92,10 @@ public class PlayerController : MonoBehaviour
         OnEnterTrainerView?.Invoke(collider);
     }
    }
+   public string Name{
+        get => name;
+    }
+    public Sprite Sprite{
+        get => sprite;
+    }
 }

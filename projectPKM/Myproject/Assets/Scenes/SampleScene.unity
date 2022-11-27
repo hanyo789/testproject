@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7032988429832290135, guid: b5418a25248d29940a7a5d14bd4ba138, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7032988429832290135, guid: b5418a25248d29940a7a5d14bd4ba138, type: 3}
       propertyPath: m_AnchorMax.x
@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 48825965}
   - component: {fileID: 48825964}
   - component: {fileID: 48825963}
+  - component: {fileID: 48825970}
   m_Layer: 8
   m_Name: Trainer
   m_TagString: Untagged
@@ -626,6 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882133be0cedf26429c7b06f94e1bb66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: SomeDude
+  sprite: {fileID: 21300000, guid: 4e9112dc7da4fad42bc8723ed2a4a09c, type: 3}
   dialog:
     lines:
     - I hard u beate the first gym, Lets Battle!
@@ -791,6 +794,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48825970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48825962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7dd029da3ce4c4ab6915db9cdaed37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemons:
+  - _base: {fileID: 11400000, guid: eb0fb8ddc4f9bc343b17befa1b8bf989, type: 2}
+    level: 20
+  - _base: {fileID: 11400000, guid: faef24d5b87725b4288e555f975a50bf, type: 2}
+    level: 20
 --- !u!1 &74432019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162c0a24b265cf14faae645cde6af305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Hanyo
+  sprite: {fileID: 21300000, guid: 958731c62610ab241bec233d31f8e716, type: 3}
 --- !u!212 &586115370
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1756,7 +1778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemons:
   - _base: {fileID: 11400000, guid: eb0fb8ddc4f9bc343b17befa1b8bf989, type: 2}
-    level: 5
+    level: 50
   - _base: {fileID: 11400000, guid: e2efbe9424993e74bbc7f404e2ef7bf6, type: 2}
     level: 5
   - _base: {fileID: 11400000, guid: b1261eac7b213cf40812bf9d095cd8c7, type: 2}
@@ -11652,6 +11674,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerUnit: 1
   hud: {fileID: 1046894105}
+--- !u!1 &906221698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 906221701}
+  - component: {fileID: 906221700}
+  - component: {fileID: 906221699}
+  m_Layer: 0
+  m_Name: TrainerCharacter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &906221699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906221698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4e9112dc7da4fad42bc8723ed2a4a09c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &906221700
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906221698}
+  m_CullTransparentMesh: 1
+--- !u!224 &906221701
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906221698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1113509724}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 201.34, y: 125}
+  m_SizeDelta: {x: 250, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1019916808
 GameObject:
   m_ObjectHideFlags: 0
@@ -11765,6 +11862,8 @@ MonoBehaviour:
   enemyUnit: {fileID: 1355191983}
   dialogBox: {fileID: 1704086781}
   partyScreen: {fileID: 1684899588}
+  playerImage: {fileID: 2065251792}
+  trainerImage: {fileID: 906221699}
 --- !u!1 &1042871624
 GameObject:
   m_ObjectHideFlags: 0
@@ -11968,6 +12067,8 @@ RectTransform:
   - {fileID: 1079203141}
   - {fileID: 887092227}
   - {fileID: 1355191980}
+  - {fileID: 2065251790}
+  - {fileID: 906221701}
   - {fileID: 1704086778}
   - {fileID: 1046894102}
   - {fileID: 516016712}
@@ -13461,7 +13562,7 @@ RectTransform:
   - {fileID: 17524236}
   - {fileID: 1960086558}
   m_Father: {fileID: 1113509724}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13620,7 +13721,7 @@ RectTransform:
   - {fileID: 247577746}
   - {fileID: 1721939232}
   m_Father: {fileID: 1113509724}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14447,6 +14548,81 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &2065251789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2065251790}
+  - component: {fileID: 2065251791}
+  - component: {fileID: 2065251792}
+  m_Layer: 0
+  m_Name: PlayerCharacter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2065251790
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065251789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1113509724}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -199.44994, y: -73.88898}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2065251791
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065251789}
+  m_CullTransparentMesh: 1
+--- !u!114 &2065251792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065251789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 958731c62610ab241bec233d31f8e716, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2109765967
 GameObject:
   m_ObjectHideFlags: 0
@@ -14674,7 +14850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7032988429832290135, guid: b5418a25248d29940a7a5d14bd4ba138, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7032988429832290135, guid: b5418a25248d29940a7a5d14bd4ba138, type: 3}
       propertyPath: m_AnchorMax.x
