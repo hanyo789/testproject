@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState {Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver}
+public enum BattleState {Start, ActionSelection, MoveSelection, AboutToUse, RunningTurn, Busy, PartyScreen, BattleOver}
 public enum BattleAction{Move, SwitchPokemon, UseItem, Run}
 public class BattleSystem : MonoBehaviour
 {
@@ -23,6 +23,7 @@ public class BattleSystem : MonoBehaviour
     int currentAction;
     int currentMove;
     int currentMember;
+    bool aboutToUseChoice = true;
 
     PokemonParty playerParty;
     PokemonParty trainerParty;
@@ -130,6 +131,16 @@ void MoveSelection()
     dialogBox.EnableActionSelector(false);
     dialogBox.EnableDialogText(false);
     dialogBox.EnableMoveSelector(true);
+}
+
+IEnumerator AboutToUse(Pokemon newPokemon)
+{
+    state = BattleState.Busy;
+    yield return dialogBox.TypeDialog($"{trainer.Name} is about to send {newPokemon.Base.Name}. Do you want to change pokemon?");
+
+    state = BattleState.AboutToUse;
+    dialogBox.EnableChoiceBox(true);
+
 }
 
 IEnumerator RunTurns(BattleAction playerAction)
@@ -295,6 +306,8 @@ IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target, 
             yield return new WaitForSeconds(2f);
         
             CheckForBattleOver(sourceUnit);
+            yield return new WaitUntil(() => state == BattleState.RunningTurn);
+
         }   
     }
 
@@ -350,7 +363,7 @@ void CheckForBattleOver( BattleUnit faintedUnit)
         {
             var nextPokemon = trainerParty.GetHeathyPokemon();
             if(nextPokemon != null)
-                StartCoroutine(SendNextTrainerPokemon(nextPokemon));
+                StartCoroutine(AboutToUse(nextPokemon));
             else
             {
                 BattleOver(true);
@@ -383,6 +396,9 @@ public void HandleUpdate()
     }
     else if (state == BattleState.PartyScreen){
         HandlePartySelection();
+    }
+    else if (state == BattleState.AboutToUse){
+        HandbleAboutToUse();
     }
 }
 void HandleActionSelection()
@@ -495,13 +511,53 @@ if( Input.GetKeyDown(KeyCode.Z))
     }
     
 }
-else if (Input.GetKeyDown(KeyCode.Z))
+else if (Input.GetKeyDown(KeyCode.X))
 {
+    if(playerUnit.Pokemon.HP <= 0)
+    {
+
+        return;
+    }
     partyScreen.gameObject.SetActive(false);
-    ActionSelection();
+
+    if(prevState == BattleState.AboutToUse)
+    {
+        prevState = null;
+        StartCoroutine(SendNextTrainerPokemon());
+    }
+        
+    else
+        ActionSelection();
 }
 }
 
+void HandbleAboutToUse()
+{
+    if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        aboutToUseChoice = !aboutToUseChoice;
+
+    dialogBox.UpdateChoiceBox(aboutToUseChoice);
+
+    if(Input.GetKeyDown(KeyCode.Z))
+    {
+        dialogBox.EnableChoiceBox(false);
+        if(aboutToUseChoice == true)
+        {
+            //yes
+            prevState = BattleState.AboutToUse;
+            OpenPartyScreen();
+        }
+        else
+        {
+            //no
+            StartCoroutine(SendNextTrainerPokemon());       
+        }
+    }
+    else if (Input.GetKeyDown(KeyCode.X)){
+        dialogBox.EnableChoiceBox(false);
+        StartCoroutine(SendNextTrainerPokemon());
+    }
+}
 IEnumerator SwitchPokemon(Pokemon newPokemon)
 {
   
@@ -518,16 +574,25 @@ IEnumerator SwitchPokemon(Pokemon newPokemon)
     dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
     yield return dialogBox.TypeDialog($"Go {newPokemon.Base.Name}!");
-
-    state = BattleState.RunningTurn;
+    if(prevState == null) 
+    {
+        state = BattleState.RunningTurn;
+    }
+    else if (prevState == BattleState.AboutToUse)
+    {
+        prevState = null;
+        StartCoroutine(SendNextTrainerPokemon()); 
+    }
+    
      
 
 }
 
-IEnumerator SendNextTrainerPokemon(Pokemon nextPokemon)
+IEnumerator SendNextTrainerPokemon()
 {
     state = BattleState.Busy;
 
+    var nextPokemon = trainerParty.GetHeathyPokemon();
     enemyUnit.Setup(nextPokemon);
     yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextPokemon.Base.Name}!");
     
