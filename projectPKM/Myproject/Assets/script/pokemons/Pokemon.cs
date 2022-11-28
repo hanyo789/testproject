@@ -14,6 +14,14 @@ public class Pokemon
 
     [SerializeField] PokemonBase _base;
     [SerializeField] int level;
+
+    public Pokemon(PokemonBase pBase, int pLevel)
+    {
+        _base = pBase;
+        level = pLevel;
+
+        Init();
+    }
     public PokemonBase Base {
         get{
             return _base;
@@ -38,14 +46,14 @@ public class Pokemon
     public Condition OtherStatus {get; private set; }
     public int OtherStatusTime {get; set;}
 
-    public Queue<string> StatusChanges {get; private set;} = new Queue<string>();
+    public Queue<string> StatusChanges {get; private set;}
     public bool HpChanged {get; set;}
     public event System.Action OnStatusChanged;
     public void Init()
     {
         
         
-        
+        //generate move
         Moves = new List<Move>();
         foreach (var move in Base.LearnableMoves)
         {
@@ -56,9 +64,9 @@ public class Pokemon
             break;
         }
             CalculateStats();
-
             HP = MaxHp;
 
+            StatusChanges = new Queue<string>();
            ResetStatBoost();
            Status = null;
            OtherStatus = null;
