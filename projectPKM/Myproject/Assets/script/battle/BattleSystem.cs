@@ -30,9 +30,12 @@ public class BattleSystem : MonoBehaviour
     PokemonParty playerParty;
     PokemonParty trainerParty;
     Pokemon wildPokemon;
+
     bool isTrainerBattle = false;
     PlayerController player;
     TrainerController trainer;
+
+    int escapeAttempt;
 
     public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon)
      {
@@ -103,7 +106,7 @@ public class BattleSystem : MonoBehaviour
         }
 
 
-           
+        escapeAttempt = 0;   
         partyScreen.Init();
         ActionSelection();
 }
@@ -197,6 +200,10 @@ IEnumerator RunTurns(BattleAction playerAction)
             dialogBox.EnableActionSelector(false);
             yield return ThrowPokeball();
         }
+        else if ( playerAction == BattleAction.Run)
+        {
+            yield return TryToEscape();
+        }
 
         //enemy turn
         var enemyMove = enemyUnit.Pokemon.GetRandomMove();
@@ -255,11 +262,7 @@ if (CheckIfMoveHits(move, sourceUnit.Pokemon, targetUnit.Pokemon))
     
         if(targetUnit.Pokemon.HP <= 0)
         {
-            yield return dialogBox.TypeDialog($"{targetUnit.Pokemon.Base.Name} Fainted!");
-            targetUnit.PlayFaintAnimation();
-            yield return new WaitForSeconds(2f);
-        
-            CheckForBattleOver(targetUnit);
+            yield return HandlePokemonFainted(targetUnit);
         }
     }
     else
@@ -310,11 +313,7 @@ IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target, 
         yield return sourceUnit.Hud.UpdateHP();
         if(sourceUnit.Pokemon.HP <= 0)
         {
-            yield return dialogBox.TypeDialog($"{sourceUnit.Pokemon.Base.Name} Fainted!");
-            sourceUnit.PlayFaintAnimation();
-            yield return new WaitForSeconds(2f);
-        
-            CheckForBattleOver(sourceUnit);
+            yield return HandlePokemonFainted(sourceUnit);
             yield return new WaitUntil(() => state == BattleState.RunningTurn);
 
         }   
@@ -350,6 +349,28 @@ IEnumerator ShowStatusChanges(Pokemon pokemon)
         var message = pokemon.StatusChanges.Dequeue();
         yield return dialogBox.TypeDialog(message);
     }
+}
+
+IEnumerator HandlePokemonFainted(BattleUnit faintedUnit)
+{
+    yield return dialogBox.TypeDialog($"{faintedUnit.Pokemon.Base.Name} Fainted!");
+    faintedUnit.PlayFaintAnimation();
+    yield return new WaitForSeconds(2f);
+
+    if (!faintedUnit.IsPlayerUnit)
+    {
+        //gain exp
+        int expYield = faintedUnit.Pokemon.Base.ExpYield;
+        int enemyLevel = faintedUnit.Pokemon.Level;
+        float trainerBonus = (isTrainerBattle) ? 1.5f : 1f;
+
+        int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7) ;
+        playerUnit.Pokemon.Exp += expGain;
+        yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} gained some exp!");
+        yield return playerUnit.Hud.SetExpSmooth();
+    }
+        
+    CheckForBattleOver(faintedUnit);
 }
 
 void CheckForBattleOver( BattleUnit faintedUnit)
@@ -446,6 +467,7 @@ if (Input.GetKeyDown(KeyCode.Z))
     else if (currentAction == 3)
     {
         // run
+        StartCoroutine(RunTurns(BattleAction.Run));
     }
 }
 }
@@ -689,6 +711,45 @@ IEnumerator SendNextTrainerPokemon()
         }
 
         return shakeCount;
+    }
+    //run mech in gen4
+    IEnumerator TryToEscape()
+    {
+        state = BattleState.Busy;
+
+        if (isTrainerBattle)
+        {
+            yield return dialogBox.TypeDialog($"You can't run away from trainer battle");
+            state = BattleState.RunningTurn;
+            yield break;
+        }
+
+        ++escapeAttempt;
+
+        int playerSpeed = playerUnit.Pokemon.Speed;
+        int enemySpeed = enemyUnit.Pokemon.Speed;
+
+        if (enemySpeed < playerSpeed)
+        {
+            yield return dialogBox.TypeDialog($"Run away safely!");
+            BattleOver(true);
+        }
+        else 
+        {
+            float f = (playerSpeed * 128) / enemySpeed + 30 * escapeAttempt;
+            f = f % 256;
+
+            if (UnityEngine.Random.Range(0, 256) < f)
+            {
+                yield return dialogBox.TypeDialog($"Run away safely!");
+                BattleOver(true);
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog($"Can not run away!");
+                state = BattleState.RunningTurn;
+            }
+        }
     }
 }
 
