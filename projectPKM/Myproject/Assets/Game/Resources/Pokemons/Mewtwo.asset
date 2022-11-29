@@ -24,6 +24,9 @@ MonoBehaviour:
   spAttack: 100
   spDefense: 100
   speed: 100
+  expYield: 500
+  growthRate: 0
+  catchRate: 255
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: da95e11ef95770b45a628650ed1755e1, type: 2}
     level: 1
